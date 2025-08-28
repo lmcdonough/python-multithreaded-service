@@ -1,0 +1,10 @@
+# reproducible conda env spec - get started by running conda env create -f environment.yml
+name: py-mt-lab
+channels:
+- defaults
+- conda-forge
+dependencies:
+- python=3.11
+- pip
+- pip:
+  - -r requirements.txt
