@@ -6,6 +6,9 @@ from .logging_config import get_logger
 
 _logger = get_logger("timing")
 
+# Purpose: measure how long a code block takes, for quick timings and postmortems.
+# How: contextmanager captures start time with time.perf_counter(), yields control, then logs on exceptions and prints duration on success.
+# Use: wrap a block with `with timer("name"):` to print elapsed time or log errors with duration.
 @contextmanager
 def timer(label: Optional[str] = None) -> Iterator[None]:
     start = time.perf_counter()
@@ -19,4 +22,3 @@ def timer(label: Optional[str] = None) -> Iterator[None]:
     else:
         dur = time.perf_counter() - start
         print(f"{label or 'block'} {dur:.4f}s")
-        
