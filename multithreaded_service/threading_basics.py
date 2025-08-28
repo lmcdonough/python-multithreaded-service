@@ -11,6 +11,8 @@ _logger = get_logger("threading")
 # Purpose: Increment a shared counter without synchronization so races occur.
 # How: start `n` threads that repeatedly increment a shared variable without a lock.
 # Use: run to observe lost updates caused by the GIL and scheduling races.
+# example of unsafe shared state mutation without locks
+# teaches what a race condition is and why shared memory is dangerous.
 def unsafe_increment(n: int, loops: int = 100_000) -> int:
     """Increment shared counter without a lock. Expect race conditions."""
     counter = 0
@@ -26,6 +28,7 @@ def unsafe_increment(n: int, loops: int = 100_000) -> int:
 # Purpose: Increment a shared counter safely using a Lock so results are deterministic.
 # How: each increment happens while holding a threading.Lock to serialize access.
 # Use: compare output with `unsafe_increment` to see correctness vs performance tradeoffs.
+# safe incrememtn using threading.Lock to prevent race conditions
 def safe_increment(n: int, loops: int = 100_000) -> int:
     """Increment shared counter with a lock. Thread-safe, deterministic."""
     counter = 0
@@ -43,6 +46,7 @@ def safe_increment(n: int, loops: int = 100_000) -> int:
 # Purpose: Demonstrate a producer putting items into a Queue and a consumer processing them.
 # How: producer enqueues items and a sentinel; consumer dequeues until sentinel then processes items.
 # Use: study thread-safe handoff patterns and queue coordination.
+# classic producer-consumer with a thread-safe queue
 def producer_consumer(num_items: int = 5) -> List[int]:
     """Classic producer-consumer with Queue. Thread-safe handoff."""
     q: queue.Queue[int] = queue.Queue()
@@ -71,6 +75,7 @@ def producer_consumer(num_items: int = 5) -> List[int]:
 # Purpose: run `n` sleep tasks concurrently and measure per-task elapsed time.
 # How: ThreadPoolExecutor schedules tasks; as_completed yields finished futures as they complete.
 # Use: verify concurrency reduces wall-clock time for IO-bound work vs sequential runs.
+# thread pool example for scalable IO fan-out
 def parallel_sleep(n: int = 4, duration: float = 0.1) -> List[Tuple[int, float]]:
     """Run n tasks concurrently with ThreadPoolExecutor."""
     def _task(i: int) -> Tuple[int, float]:
