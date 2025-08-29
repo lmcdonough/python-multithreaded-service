@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-multithreaded-service"
+version = "0.0.1"
+requires-python = ">=3.11"
+description = "Examples and tests for Python multithreading basics"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Levi", email = "levimcdonough@gmail.com" }]
