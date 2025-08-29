@@ -1,5 +1,4 @@
 # Core threading examples: direct Thread, Lock, Queue, and ThreadPoolExecutor
-# CHANGED: add Optional to typing imports so queue can use Optional[int] for None sentinel
 from typing import List, Tuple, Optional
 import threading
 import time
